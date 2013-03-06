@@ -1,5 +1,6 @@
 // Do not remove the include below
 #include "Coletor.h"
+#include "Comunicacao/Communication.h"
 
 int ledPin =  13;    // LED connected to digital pin 13
 
