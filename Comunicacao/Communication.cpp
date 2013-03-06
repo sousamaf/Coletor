@@ -10,15 +10,15 @@
 namespace middleware
 {
 
-Communication::Communication()
-{
-	// TODO Auto-generated constructor stub
+	Communication::Communication()
+	{
+		// TODO Auto-generated constructor stub
 
-}
+	}
 
-Communication::~Communication()
-{
-	// TODO Auto-generated destructor stub
-}
+	Communication::~Communication()
+	{
+		// TODO Auto-generated destructor stub
+	}
 
 } /* namespace middleware */
