@@ -11,12 +11,12 @@
 namespace coletor
 {
 
-class cmd
-{
-public:
-	cdm();
-	virtual ~cdm();
-};
+	class cdm
+	{
+		public:
+			cdm();
+			virtual ~cdm();
+	};
 
 } /* namespace middleware */
 #endif /* CDM_H_ */
