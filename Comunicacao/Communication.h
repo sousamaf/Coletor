@@ -13,6 +13,8 @@ namespace middleware
 
 class Communication
 {
+	int frequence;
+	int idDevice;
 public:
 	Communication();
 	virtual ~Communication();
