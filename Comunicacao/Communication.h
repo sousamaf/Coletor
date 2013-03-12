@@ -18,6 +18,9 @@ class Communication
 public:
 	Communication();
 	virtual ~Communication();
+	int init(int device, int frequence);
+	int send(String message);
+	String read(String message);
 };
 
 } /* namespace middleware */
