@@ -38,8 +38,8 @@ VARIAVEIS DO LEITOR DE CARTAO------------------------------------------------
  char * nomedoarquivo= "dados.txt";               
 //---------------------------------------------------------------------------
 
-String  inputString,inputStringaux = ""; // String para acumula os dados do leitor
-
+String  inputString,inputStringaux,inputStringcomp = ""; // String para acumula os dados do leitor
+int tamString =0; //armazena o tamanho da string para usa na função completa.
 
 //USB SHIELD - cria os eventos do teclado 
 class KbdRptParser : public KeyboardReportParser
@@ -64,13 +64,32 @@ void KbdRptParser::OnKeyPressed(uint8_t key)
  uint8_t keylcl;
  
 keylcl = key;
- //verifica se o leitor dei enter e descarrega os dados da leitura
+ //verifica se o leitor deu enter e descarrega os dados da leitura
 if( keylcl == 0x13 ) {
+  
  Serial.print( " Cod.Barras: ");
-  Serial.println(inputString.length());
- if (inputString.length() < 13) {
- Serial.print( "  meno que 13  " );
+ 
+ 
+ tamString=0;
+ tamString = inputString.length();  
+ if (tamString < 13) {
+    int tamaux =0;
+    
+    String aux="";//varivave auxilia para receber o texto completado
+    tamaux = 13-tamString;
+
+    
+     //realiza um for para completa com zero o codigo   
+      for (int i=0; i < tamaux; i++){
+       inputStringcomp += "0";
+     }
+
+     //completa o codigo de barras com zero
+     aux= inputStringcomp+inputString;
+     inputString =aux;
+     inputStringcomp="";
  }
+ 
  Serial.print( inputString );
   inputStringaux = inputString+" 1.00";
   escrita(inputStringaux);  //escrevendo no cartao de memoria
