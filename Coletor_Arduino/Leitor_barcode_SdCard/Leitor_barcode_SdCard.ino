@@ -67,6 +67,10 @@ keylcl = key;
  //verifica se o leitor dei enter e descarrega os dados da leitura
 if( keylcl == 0x13 ) {
  Serial.print( " Cod.Barras: ");
+  Serial.println(inputString.length());
+ if (inputString.length() < 13) {
+ Serial.print( "  meno que 13  " );
+ }
  Serial.print( inputString );
   inputStringaux = inputString+" 1.00";
   escrita(inputStringaux);  //escrevendo no cartao de memoria
