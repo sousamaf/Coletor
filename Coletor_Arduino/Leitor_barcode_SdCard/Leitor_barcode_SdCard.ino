@@ -67,7 +67,7 @@ keylcl = key;
  //verifica se o leitor deu enter e descarrega os dados da leitura
 if( keylcl == 0x13 ) {
   
- Serial.print( " Cod.Barras: ");
+// Serial.print( " Cod.Barras: ");
  
  
  tamString=0;
@@ -93,7 +93,8 @@ if( keylcl == 0x13 ) {
  Serial.print( inputString );
   inputStringaux = inputString+" 1.00";
   escrita(inputStringaux);  //escrevendo no cartao de memoria
-  Serial.println( " Qtd.: 1.00");
+  Serial.println( "1.00");
+  //Serial.println( " Qtd.: 1.00");
   inputString = "";
 }
 else 
@@ -110,9 +111,11 @@ void setup()
 
 //inicializa a porta serial  
 Serial.begin(9600);
-Serial.println("\r\nColetor de Dados 1.0");
-Serial.println("\r\nInicializando....................."); 
-
+Serial.println("Coletor 1.0");
+delay(1000);
+Serial.println("Inicializando.."); 
+//Serial.println("\r\n"); 
+delay(1000);
 
  
 //INICIALIZANDO CARTAO DE MEMORIA
@@ -120,7 +123,7 @@ Serial.println("\r\nInicializando.....................");
 
 //inicializando o Shiel USB
 if (Usb.Init() == -1) {
-  Serial.println("Falha na Inicializacao");
+  Serial.println("Falha ao Iniciar");
 
   while(1); //halt
 }
@@ -130,7 +133,7 @@ Keyboard.SetReportParser(0, (HIDReportParser*)&Prs);
 delay( 200 );
 
  //faz uma leitura dos dados do cartao   
-leitura ();
+//leitura ();
 
 }
 
@@ -149,13 +152,13 @@ pinMode(10, OUTPUT); ///ARDUINO UNO 10 MEGA 53
 ///ARDUINO UNO 4 MEGA 53            
 if (!SD.begin(4)) {
 
-  Serial.println("Falha ao abrir o SDCard!");
+  Serial.println("Falha no SDCard!");
 
 t =1;
 return;
 }
 
- Serial.println("\n SDCard Aberto com sucesso!");
+ Serial.println("SDCard Ok!");
                         
 }
 
@@ -176,7 +179,7 @@ myFile.close();
 } else {
 // if the file didn't open, print an error:
 
-Serial.println("        ERRO AO ABRIR O ARQUIVO....");
+Serial.println("Erro no Arquivo");
 }
 
 }
@@ -210,7 +213,7 @@ else {
 else
 {
 
-  Serial.println("ARQUIVO NAO ENCONTRADO VERIFICA O NOME DO ARQUIVO.....");  
+  Serial.println("Arquivo Nao Encontrado");  
 }
 
 }

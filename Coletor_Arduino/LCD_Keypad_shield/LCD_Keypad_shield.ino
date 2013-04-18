@@ -20,7 +20,9 @@ int adc_key_in  = 0;
 #define btnLEFT   3
 #define btnSELECT 4
 #define btnNONE   5
- 
+char * leituraserial ="";
+char buffer[20];
+String str;
 // read the buttons
 int read_LCD_buttons()
 {
@@ -38,25 +40,68 @@ int read_LCD_buttons()
  
 void setup()
 {
- lcd.begin(16, 2);              // start the library
+  //inicializa a porta serial  
+ Serial.begin(9600);
+ 
+ lcd.begin(16, 2);              // quantidade de linhas e colunas
  lcd.setCursor(0,0);
- lcd.print("Push the buttons"); // print a simple message
+ //lcd.print("Push the buttons"); // print a simple message
 }
-  
+
 void loop()
 {
- lcd.setCursor(9,1);            // move cursor to second line "1" and 9 spaces over
- lcd.print(millis()/1000);      // display seconds elapsed since power-up
- 
- 
- lcd.setCursor(0,1);            // move to the begining of the second line
+    // Declara Variável de Controle de Bytes de Leitura
+  unsigned int bytesParaLeitura; 
+  int incomingByte = 0; 
+  // Verifica a Quantidade de Bytes para a Leitura
+  bytesParaLeitura = Serial.available();
+  
+// lcd.setCursor(9,1);            // move cursor to second line "1" and 9 spaces over
+ //lcd.print(millis()/1000);      // display seconds elapsed since power-up
+ lcd.setCursor(0,0);            // move to the begining of the second line
  lcd_key = read_LCD_buttons();  // read the buttons
+
+
+while(Serial.available()>0){ //enquanto estiver recebendo bytes executa o while
+//recebe dados da serial e armazena em uma string
+char c = Serial.read();
+str += c; // essa linha concatena caracteres em uma string
+}
+Serial.print(str);
+lcd.setCursor(0, 1); //coloca o cursor na posicao 0, 1
+//lcd.clear();
+lcd.print(str); //imprime no lcd a String
  
+
+ 
+/*
+ // Verifica se tem Dado para Ler
+  if (bytesParaLeitura > 0)
+  {
+    // Inicializa Array para Conter os Dados Lidos
+    char dados[bytesParaLeitura];
+  
+    //Serial.print(bytesParaLeitura);
+   // Serial.println(" bytes para leitura");
+    
+    // Recupera os Dados
+    for(int i = 0; i < bytesParaLeitura; i++)
+    {
+      dados[i] = Serial.read();
+    }
+    
+     // Envia para o Monitor Serial os Dados Lidos
+     //Serial.println(dados);
+     lcd.print(dados);
+  }
+
+*/
  switch (lcd_key)               // depending on which button was pushed, we perform an action
  {
    case btnRIGHT:
      {
      lcd.print("RIGHT ");
+     
      break;
      }
    case btnLEFT:
@@ -77,13 +122,17 @@ void loop()
    case btnSELECT:
      {
      lcd.print("SELECT");
+     lcd.clear();
      break;
      }
      case btnNONE:
      {
-     lcd.print("NONE  ");
+     //  lcd.clear(); 
+    // lcd.print("NONE  ");
      break;
      }
+     
  }
- 
+   // Realiza um Delay de 1 Segundo (1000 milisegundos)
+  delay(1000);
 }
