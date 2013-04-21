@@ -112,6 +112,7 @@ void setup()
 //inicializa a porta serial  
 Serial.begin(9600);
 Serial.println("Coletor 1.0");
+
 delay(1000);
 Serial.println("Inicializando.."); 
 //Serial.println("\r\n"); 
