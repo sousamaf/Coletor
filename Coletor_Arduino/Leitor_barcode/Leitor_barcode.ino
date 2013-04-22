@@ -1,7 +1,7 @@
 /**/
 /* COLETOR DE DADOS DE ESTOQUE
 /* AUTOR: CLEBSON M BARBOSA
-
+*/
 
 #include <Usb.h>
 #include <usbhub.h>
