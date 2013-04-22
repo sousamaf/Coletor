@@ -70,10 +70,10 @@ void setup()
   lcd.setCursor(0,0);
   //lcd.print("Push the buttons"); // print a simple message
  
- // lcd.print('Coletor 1.0');
-  //lcd.setCursor(0,1);
-  //lcd.print('Inicializando..');
-  //lcd.setCursor(0,1);
+  lcd.print("Coletor 1.0");
+  lcd.setCursor(0,1);
+  lcd.print("Inicializando..");
+  lcd.setCursor(0,1);
   
   
   //INICIALIZANDO CARTAO DE MEMORIA
@@ -208,8 +208,8 @@ myFile.close();
 
 } else {
 // if the file didn't open, print an error:
-lcd.print('Erro no Arquivo.');
-Serial.println("\nErro no Arquivo");
+lcd.print("Erro no Arquivo.");
+//Serial.println("\nErro no Arquivo");
 }
 
 }
@@ -220,13 +220,13 @@ pinMode(10, OUTPUT); ///ARDUINO UNO 10 MEGA 53
 
 ///ARDUINO UNO 4 MEGA 53            
 if (!SD.begin(4)) {
-//lcd.print('Falha no SDCard.');
- Serial.println("Falha no SDCard");
+ lcd.print("Falha no SDCard.");
+ //Serial.println("Falha no SDCard");
 
 t =1;
 return;
 }
-lcd.print('SDCard Ok.');
+lcd.print("SDCard Ok.          ");
  //Serial.println("SDCard Ok");
                         
 }
