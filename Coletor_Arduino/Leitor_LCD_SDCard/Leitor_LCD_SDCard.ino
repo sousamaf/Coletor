@@ -33,6 +33,8 @@ int adc_key_in  = 0;
 
 
 String SerialBuffer = "";
+String StrGravaSdcard ="";//grava o codigo de barras no sdcard
+int   QdtDigitada =1; //variavel que armazena a quantidade digitada;
 /*
 VARIAVEIS DO LEITOR DE CARTAO------------------------------------------------
 */
@@ -102,12 +104,15 @@ void loop()
           //verifica a posição de 0 a 4 se contem a palavra poll de scanner da porta usb
          if (SerialBuffer.substring(0,4) != "Poll") {
             SerialBuffer.trim(); //remove os espaços vazios
+           StrGravaSdcard="";//limpa a variavel que ira receber o conteudo da variavel que receber os dados da serial
+           lcd.clear();
            lcd.setCursor(0,0);
            lcd.print(SerialBuffer);
            lcd.setCursor(0,1);
            lcd.print("Digite Qtd:");
            lcd.setCursor(11,1);
-           lcd.print("1.00");
+           lcd.print("1");
+           StrGravaSdcard = SerialBuffer; //alimenta a variavel a ser gravada no sdcard
          }
         SerialBuffer = "";
       }
@@ -124,30 +129,80 @@ void loop()
   {
   case btnRIGHT:
     {
-      lcd.print("RIGHT ");
-
+       //decrementa a quantidade de -10
+      //so permite digita se tive dado na tela
+      if (StrGravaSdcard.length() == 13) {
+        
+            QdtDigitada = QdtDigitada-10; //decrementa a quantidade
+           
+            lcd.setCursor(0,1);
+            lcd.print("Digite Qtd:     ");
+            lcd.setCursor(11,1);
+            lcd.print(QdtDigitada);
+            lcd.setCursor(0,0);
+      }
       break;
     }
   case btnLEFT:
     {
-      lcd.print("LEFT   ");
+     //incrementa a quantidade de 10 em 10
+      //so permite digita se tive dado na tela
+      if (StrGravaSdcard.length() == 13) {
+        
+            QdtDigitada = QdtDigitada+10; //decrementa a quantidade
+            lcd.setCursor(0,1);
+            lcd.print("Digite Qtd:     ");
+            lcd.setCursor(11,1);
+            lcd.print(QdtDigitada);
+            lcd.setCursor(0,0);
+      }
       break;
     }
   case btnUP:
     {
-      lcd.print("UP    ");
+      //so permite digita se tive dado na tela
+      if (StrGravaSdcard.length() == 13) {
+      QdtDigitada = QdtDigitada++; //incrementa a quantidade
+      lcd.setCursor(0,1);
+      lcd.print("Digite Qtd:     ");
+      lcd.setCursor(11,1);
+      lcd.print(QdtDigitada);
+      lcd.setCursor(0,0);
+      }
       break;
     }
   case btnDOWN:
     {
-      lcd.print("DOWN  ");
+      //so permite digita se tive dado na tela
+      if (StrGravaSdcard.length() == 13) {
+        
+            QdtDigitada = QdtDigitada--; //decrementa a quantidade
+            lcd.setCursor(0,1);
+            lcd.print("Digite Qtd:     ");
+            lcd.setCursor(11,1);
+            lcd.print(QdtDigitada);
+            lcd.setCursor(0,0);
+      }
+
       break;
     }
   case btnSELECT:
     {
-      escrita("SELECT");  //escrevendo no cartao de memoria
-     // lcd.print("SELECT");
+    //verifica se a variaval tem algums conteudo para ser gravado 
+    if (StrGravaSdcard.length() == 13) {
+    
+      escrita(StrGravaSdcard+" "+QdtDigitada);  //escrevendo no cartao de memoria
+      StrGravaSdcard="";
+      QdtDigitada  =1;
+      //lcd.clear();
+     // lcd.print("SELECT"); 
+    }
+    else//se nao tem pede para scanner um dado
+    {
       lcd.clear();
+      lcd.print("Passe o Produto..."); 
+    }
+
       break;
     }
   case btnNONE:
@@ -158,7 +213,7 @@ void loop()
     }
 
   }
-
+delay(200);  //wait 40ms
 }
  //realiza a leitura dos dados
  void leitura (){    
@@ -203,6 +258,9 @@ myFile = SD.open(nomedoarquivo, FILE_WRITE);
 if (myFile) {
 //ESCREVE DOS DADOS NO ARQUIVO;
 myFile.println(dadosescrita);
+lcd.setCursor(0,1);
+lcd.print("Dado Gravado ok.");
+lcd.setCursor(0,0);
  // FECHA O ARQUIVO:
 myFile.close();
 

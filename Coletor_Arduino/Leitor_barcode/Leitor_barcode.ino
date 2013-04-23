@@ -45,7 +45,8 @@ keylcl = key;
 if( keylcl == 0x13 ) {
 
  tamString=0;
- tamString = inputString.length();  
+ tamString = inputString.length();
+//se a variavel for meno que 13 enquementa 
  if (tamString < 13) {
     int tamaux =0;
     
