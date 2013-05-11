@@ -1,0 +1,22 @@
+#######################################
+# Syntax Coloring Map For Comn Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Comn	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+setPin	KEYWORD2
+init	KEYWORD2
+send	KEYWORD2
+read	KEYWORD2
+getconfig	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
