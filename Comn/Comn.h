@@ -6,20 +6,15 @@
 
 class Comn  {  
   public:
-    Comn(int);
-    void setPin(int);
-	bool start_apc220(char *,char *,char *,char *,char *);
-	void getconfig();
-	void setupApc();
+    Comn();   
 	void init(char *str,int);
-	bool send(char *str);  
-	char *trim(char *);
-	String read();
-	String convertertostring(char *);
-	
-  private:
+	void send(char *str);  	
+	String read();	
+  private:    		
     int _pin;
     bool _send;	
+	char *trim(char *);
+	String convertertostring(char *);
 };
 
 #endif
